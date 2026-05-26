@@ -11,6 +11,32 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            addDoc
+        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCGDjzUXl47rBjM7Lmz0ZJAe-F9f9U6N4A",
+            authDomain: "nguyen-thi-tra.firebaseapp.com",
+            projectId: "nguyen-thi-tra",
+            storageBucket: "nguyen-thi-tra.firebasestorage.app",
+            messagingSenderId: "1085990834449",
+            appId: "1:1085990834449:web:f917e5ead4adff4e863cb0",
+            measurementId: "G-VM056TTHV1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.db = db;
+        window.collection = collection;
+        window.addDoc = addDoc;
+    </script>
+
     <!-- Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
@@ -139,23 +165,36 @@
                 }
             };
 
-            const onFinish = (values) => {
+            const onFinish = async (values) => {
 
-                console.log(values);
+                try {
 
-                // Lưu thời gian nhạc
-                localStorage.setItem(
-                    "musicTime",
-                    audio.currentTime
-                );
+                    await addDoc(
+                        collection(db, "messages"),
+                        {
+                            birthday: values.birthday.format("DD/MM/YYYY"),
+                            message: values.message || "",
+                            createdAt: new Date()
+                        }
+                    );
 
-                message.success("Đang chuyển trang...");
+                    localStorage.setItem(
+                        "musicTime",
+                        audio.currentTime
+                    );
 
-                setTimeout(() => {
+                    message.success("Đã lưu thành công ❤️");
 
-                    window.location.href = "planet.html";
+                    setTimeout(() => {
+                        window.location.href = "planet.html";
+                    }, 1200);
 
-                }, 1200);
+                } catch (error) {
+
+                    console.error(error);
+                    message.error("Lưu dữ liệu thất bại");
+
+                }
             };
 
             return (
@@ -176,32 +215,6 @@
                         layout="vertical"
                         onFinish={onFinish}
                     >
-
-                        <Form.Item
-                            label="Họ và tên"
-                            name="name"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "Vui lòng nhập tên"
-                                }
-                            ]}
-                        >
-                            <Input placeholder="Nhập họ tên..." />
-                        </Form.Item>
-
-                        <Form.Item
-                            label="Email"
-                            name="email"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "Vui lòng nhập email"
-                                }
-                            ]}
-                        >
-                            <Input placeholder="Nhập email..." />
-                        </Form.Item>
 
                         <Form.Item
                             label="Ngày sinh"
@@ -225,7 +238,7 @@
                         >
                             <Input.TextArea
                                 rows={4}
-                                placeholder="Nhập lời nhắn..."
+                                placeholder="Cho anh biết sở thích của em nhé"
                             />
                         </Form.Item>
 
