@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Intro Form</title>
+
+    <!-- React -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Ant Design -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/antd@5/dist/reset.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/antd@5/dist/antd.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/dayjs/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/antd@5/dist/antd.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+
+            background:
+                radial-gradient(circle at top, #1f1f1f, #000);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            width: 420px;
+            max-width: 90%;
+
+            padding: 35px;
+
+            border-radius: 24px;
+
+            background: rgba(255, 255, 255, 0.08);
+
+            backdrop-filter: blur(18px);
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            box-shadow:
+                0 0 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .title {
+            text-align: center;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .ant-form-item-label label {
+            color: white !important;
+            font-weight: 500;
+        }
+
+        .ant-input,
+        .ant-picker,
+        .ant-input-textarea textarea {
+            background: rgba(255, 255, 255, 0.08) !important;
+
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+
+            color: white !important;
+
+            height: 45px;
+            border-radius: 12px;
+        }
+
+        .ant-input::placeholder,
+        .ant-input-textarea textarea::placeholder {
+            color: rgba(255, 255, 255, 0.45) !important;
+        }
+
+        .ant-picker-input input {
+            color: white !important;
+        }
+
+        .ant-btn {
+            height: 48px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 25px;
+            }
+
+            .title {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const {
+            Form,
+            Input,
+            Button,
+            DatePicker,
+            message
+        } = antd;
+
+        function App() {
+
+            const onFinish = (values) => {
+
+                console.log(values);
+
+                message.success("Đang chuyển trang...");
+
+                setTimeout(() => {
+
+                    // CHUYỂN HẲN SANG TRANG KHÁC
+                    window.location.href = "planet.html";
+
+                }, 1200);
+            };
+
+            return (
+                <div className="form-container">
+
+                    <div className="title">
+                        Welcome
+                    </div>
+
+                    <Form
+                        layout="vertical"
+                        onFinish={onFinish}
+                    >
+
+                        <Form.Item
+                            label="Họ và tên"
+                            name="name"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng nhập tên"
+                                }
+                            ]}
+                        >
+                            <Input placeholder="Nhập họ tên..." />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Email"
+                            name="email"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng nhập email"
+                                }
+                            ]}
+                        >
+                            <Input placeholder="Nhập email..." />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Ngày sinh"
+                            name="birthday"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng chọn ngày sinh"
+                                }
+                            ]}
+                        >
+                            <DatePicker
+                                style={{ width: "100%" }}
+                                format="DD/MM/YYYY"
+                            />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Lời nhắn"
+                            name="message"
+                        >
+                            <Input.TextArea
+                                rows={4}
+                                placeholder="Nhập lời nhắn..."
+                            />
+                        </Form.Item>
+
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            block
+                        >
+                            Submit
+                        </Button>
+
+                    </Form>
+
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(
+            document.getElementById("root")
+        ).render(<App />);
+
+    </script>
+
+</body>
+
+</html>
