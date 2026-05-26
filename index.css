@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     width: 100%;
@@ -10,16 +16,27 @@ body {
 
     font-family: Arial, sans-serif;
 
-    /* 🌌 Deep Space */
     background:
-        radial-gradient(circle at top, rgba(0, 255, 255, 0.15), transparent 35%),
-        radial-gradient(circle at bottom, rgba(255, 0, 255, 0.12), transparent 40%),
-        linear-gradient(180deg, #02030a 0%, #050816 40%, #02030a 100%);
+        radial-gradient(circle at top,
+            rgba(0, 255, 255, 0.15),
+            transparent 35%),
+
+        radial-gradient(circle at bottom,
+            rgba(255, 0, 255, 0.12),
+            transparent 40%),
+
+        linear-gradient(180deg,
+            #02030a 0%,
+            #050816 40%,
+            #02030a 100%);
 
     position: relative;
 }
 
-/* ✨ Lớp sao */
+/* ===========================
+   STARS
+=========================== */
+
 body::before {
     content: "";
 
@@ -33,16 +50,20 @@ body::before {
         radial-gradient(2px 2px at 400px 70px, #ff00ff, transparent),
         radial-gradient(1.5px 1.5px at 600px 220px, white, transparent),
         radial-gradient(2px 2px at 850px 120px, #00ffff, transparent),
-        radial-gradient(1.5px 1.5px at 1000px 300px, white, transparent);
+        radial-gradient(1.5px 1.5px at 1000px 300px, white, transparent),
+        radial-gradient(2px 2px at 1300px 200px, #ffffff, transparent);
 
-    background-size: 1200px 600px;
+    background-size: 1400px 700px;
 
-    opacity: 0.8;
+    opacity: .8;
 
     animation: starsMove 120s linear infinite;
 }
 
-/* 🌌 Nebula blur */
+/* ===========================
+   NEBULA
+=========================== */
+
 body::after {
     content: "";
 
@@ -62,7 +83,35 @@ body::after {
     animation: nebulaMove 10s ease-in-out infinite alternate;
 }
 
-/* 💎 Glassmorphism Card */
+/* ===========================
+   SHOOTING STAR
+=========================== */
+
+.shooting-star {
+    position: absolute;
+
+    top: 100px;
+    left: -250px;
+
+    width: 250px;
+    height: 2px;
+
+    background:
+        linear-gradient(90deg,
+            white,
+            transparent);
+
+    transform: rotate(-25deg);
+
+    opacity: .8;
+
+    animation: shooting 7s linear infinite;
+}
+
+/* ===========================
+   GLASS CARD
+=========================== */
+
 .form-container {
     position: relative;
     z-index: 5;
@@ -74,9 +123,12 @@ body::after {
 
     border-radius: 30px;
 
+    overflow: hidden;
+
     background: rgba(255, 255, 255, 0.06);
 
     backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
 
     border: 1px solid rgba(255, 255, 255, 0.12);
 
@@ -86,9 +138,17 @@ body::after {
         inset 0 0 20px rgba(255, 255, 255, 0.03);
 
     animation: floatCard 5s ease-in-out infinite;
+
+    transition: .4s;
 }
 
-/* ✨ Glow viền */
+.form-container:hover {
+    box-shadow:
+        0 0 40px rgba(0, 255, 255, 0.25),
+        0 0 90px rgba(255, 0, 255, 0.2),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
 .form-container::before {
     content: "";
 
@@ -107,35 +167,46 @@ body::after {
 
     filter: blur(18px);
 
-    opacity: 0.7;
+    opacity: .7;
 }
 
-/* 🌠 Title */
+/* ===========================
+   TITLE
+=========================== */
+
 .title {
     text-align: center;
 
     color: white;
 
-    font-size: 36px;
+    font-size: 38px;
     font-weight: bold;
 
     margin-bottom: 30px;
 
     letter-spacing: 2px;
 
-    text-shadow:
-        0 0 10px #00ffff,
-        0 0 20px #ff00ff,
-        0 0 40px rgba(255, 255, 255, 0.5);
+    animation: glowTitle 3s ease-in-out infinite alternate;
 }
 
-/* 🌌 Input Antd */
-.ant-input,
-.ant-picker,
-.ant-input-textarea textarea {
-    background: rgba(255, 255, 255, 0.07) !important;
+/* ===========================
+   LABEL
+=========================== */
 
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+.ant-form-item-label label {
+    color: rgba(255, 255, 255, .95) !important;
+    font-weight: 500;
+}
+
+/* ===========================
+   INPUTS
+=========================== */
+
+.ant-input,
+.ant-picker {
+    background: rgba(255, 255, 255, .07) !important;
+
+    border: 1px solid rgba(255, 255, 255, .15) !important;
 
     color: white !important;
 
@@ -143,32 +214,43 @@ body::after {
 
     border-radius: 14px;
 
-    transition: 0.3s;
+    transition: .3s;
 }
 
-/* ✨ Focus */
+.ant-picker-input input {
+    color: white !important;
+}
+
+.ant-input-textarea textarea {
+    min-height: 120px !important;
+
+    background: rgba(255, 255, 255, .07) !important;
+
+    border: 1px solid rgba(255, 255, 255, .15) !important;
+
+    color: white !important;
+
+    border-radius: 14px;
+}
+
+.ant-input::placeholder,
+.ant-input-textarea textarea::placeholder {
+    color: rgba(255, 255, 255, .45) !important;
+}
+
 .ant-input:focus,
 .ant-picker-focused,
 .ant-input-textarea textarea:focus {
     border-color: #00ffff !important;
 
     box-shadow:
-        0 0 10px rgba(0, 255, 255, 0.5) !important;
+        0 0 12px rgba(0, 255, 255, .5) !important;
 }
 
-/* Placeholder */
-.ant-input::placeholder,
-.ant-input-textarea textarea::placeholder {
-    color: rgba(255, 255, 255, 0.45) !important;
-}
+/* ===========================
+   BUTTON
+=========================== */
 
-/* Label */
-.ant-form-item-label label {
-    color: rgba(255, 255, 255, 0.9) !important;
-    font-weight: 500;
-}
-
-/* 🚀 Button */
 .ant-btn {
     height: 50px;
 
@@ -180,27 +262,84 @@ body::after {
     font-weight: bold;
 
     background:
-        linear-gradient(135deg, #00ffff, #ff00ff) !important;
+        linear-gradient(135deg,
+            #00ffff,
+            #ff00ff) !important;
 
     box-shadow:
-        0 0 20px rgba(0, 255, 255, 0.35);
+        0 0 20px rgba(0, 255, 255, .35);
 
-    transition: 0.3s;
+    transition: .3s;
 }
 
 .ant-btn:hover {
-    transform: scale(1.03);
+    transform: translateY(-2px);
 
     box-shadow:
-        0 0 30px rgba(255, 0, 255, 0.45) !important;
+        0 0 30px rgba(255, 0, 255, .45) !important;
 }
 
-/* 🌠 Floating */
+/* ===========================
+   MUSIC BUTTON
+=========================== */
+
+.music-btn {
+    width: 100%;
+    height: 48px;
+
+    margin-bottom: 20px;
+
+    border: none;
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    background:
+        linear-gradient(135deg,
+            rgba(0, 255, 255, .25),
+            rgba(255, 0, 255, .25));
+
+    backdrop-filter: blur(10px);
+
+    transition: .3s;
+}
+
+.music-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 20px rgba(0, 255, 255, .3);
+}
+
+/* ===========================
+   ANIMATIONS
+=========================== */
+
+@keyframes glowTitle {
+    from {
+        text-shadow:
+            0 0 10px #00ffff,
+            0 0 20px #ff00ff;
+    }
+
+    to {
+        text-shadow:
+            0 0 20px #00ffff,
+            0 0 40px #ff00ff,
+            0 0 60px white;
+    }
+}
+
 @keyframes floatCard {
 
     0%,
     100% {
-        transform: translateY(0px);
+        transform: translateY(0);
     }
 
     50% {
@@ -208,7 +347,6 @@ body::after {
     }
 }
 
-/* ✨ Stars */
 @keyframes starsMove {
     from {
         transform: translateY(0);
@@ -219,7 +357,6 @@ body::after {
     }
 }
 
-/* 🌌 Nebula */
 @keyframes nebulaMove {
     from {
         transform: translate(-100px, -50px) scale(1);
@@ -227,5 +364,25 @@ body::after {
 
     to {
         transform: translate(100px, 50px) scale(1.2);
+    }
+}
+
+@keyframes shooting {
+    0% {
+        transform:
+            translateX(0) translateY(0) rotate(-25deg);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateX(1800px) translateY(500px) rotate(-25deg);
+
+        opacity: 0;
     }
 }
