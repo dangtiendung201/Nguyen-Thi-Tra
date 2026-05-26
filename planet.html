@@ -32,6 +32,21 @@
   <!-- MAIN SCRIPT -->
   <script type="module" src="./main.js"></script>
 
+  <audio id="bgMusic" autoplay loop>
+    <source src="./assets/Dancing In The Dark.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const audio = document.getElementById("bgMusic");
+
+    const savedTime = localStorage.getItem("musicTime");
+
+    if (savedTime) {
+      audio.currentTime = savedTime;
+    }
+
+    audio.play();
+  </script>
 </body>
 
 </html>

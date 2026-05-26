@@ -87,10 +87,20 @@ function initTinhCau() {
   };
 
   const defaultHeartImages = [
-    "images/anh1.jpg",
-    "images/anh2.jpg",
-    "images/anh3.jpg",
-    "images/anh4.jpg"
+    "images/tea1.jpg",
+    "images/tea2.jpg",
+    "images/tea3.jpg",
+    "images/tea4.jpg",
+    "images/tea5.jpg",
+    "images/tea6.jpg",
+    "images/tea7.jpg",
+    "images/tea8.jpg",
+    "images/tea9.jpg",
+    "images/tea10.jpg",
+    "images/tea11.jpg",
+    "images/tea12.jpg",
+    "images/tea13.jpg",
+
   ];
 
   const heartImages = [
